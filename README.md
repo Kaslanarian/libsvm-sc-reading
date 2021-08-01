@@ -1,14 +1,20 @@
-## <center>引言
+## 引言
 
 早在学习SVM时，笔者便有亲手实现一个SVM的想法。后来发现其实现难度与数学技巧远高于单隐层神经网络，这对于只能写出一个二分类感知机的我不亚于小学生做高考题。在老师的建议下，笔者决定去阅读当前最流行的SVM代码库：libSVM和libLinear的源代码，不仅是学习SVM怎么写，也是学习一个合格的代码框架应该如何去设计。在此之前，笔者已经对SVM的SMO算法和实现技巧进行了一些零散的了解，这里打算将它们串联起来，同时为阅读源码提供一定的数学基础。
 
-## <center>SVM和libSVM
+## 预览
+
+![1](src/1.png)
+
+![2](src/2.png)
+
+## SVM和libSVM
 
 [支持向量机]([Support-vector machine - Wikipedia](https://en.wikipedia.org/wiki/Support-vector_machine))(SVM, Support Vector Machine)属于一种线性分类器，是建立在统计学习理论的VC维理论和结构风险最小原理的基础上，根据有限的训练集，在模型的复杂性和学习性之间寻求最佳的折中，以获得最好的泛化能力的经典分类方法。
 
 [libSVM]([LIBSVM -- A Library for Support Vector Machines (ntu.edu.tw)](https://www.csie.ntu.edu.tw/~cjlin/libsvm/))是由国立台湾大学的林智仁教授等开发的一款利用支持向量机用于分类、回归和区间估计等机器学习任务的多语言（C++、Java、Python、MATLAB等）、跨平台（Windows、Linux、mac OS）的集成化软件，最新版本为Version 3.25。
 
-## <center> libSVM
+## libSVM
 
 这一部分主要讨论libSVM相关，包括算法和实现。
 
