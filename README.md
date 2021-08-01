@@ -10,9 +10,9 @@
 
 ## SVM和libSVM
 
-[支持向量机]([Support-vector machine - Wikipedia](https://en.wikipedia.org/wiki/Support-vector_machine))(SVM, Support Vector Machine)属于一种线性分类器，是建立在统计学习理论的VC维理论和结构风险最小原理的基础上，根据有限的训练集，在模型的复杂性和学习性之间寻求最佳的折中，以获得最好的泛化能力的经典分类方法。
+[支持向量机](https://en.wikipedia.org/wiki/Support-vector_machine)(SVM, Support Vector Machine)属于一种线性分类器，是建立在统计学习理论的VC维理论和结构风险最小原理的基础上，根据有限的训练集，在模型的复杂性和学习性之间寻求最佳的折中，以获得最好的泛化能力的经典分类方法。
 
-[libSVM]([LIBSVM -- A Library for Support Vector Machines (ntu.edu.tw)](https://www.csie.ntu.edu.tw/~cjlin/libsvm/))是由国立台湾大学的林智仁教授等开发的一款利用支持向量机用于分类、回归和区间估计等机器学习任务的多语言（C++、Java、Python、MATLAB等）、跨平台（Windows、Linux、mac OS）的集成化软件，最新版本为Version 3.25。
+[libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/)是由国立台湾大学的林智仁教授等开发的一款利用支持向量机用于分类、回归和区间估计等机器学习任务的多语言（C++、Java、Python、MATLAB等）、跨平台（Windows、Linux、mac OS）的集成化软件，最新版本为Version 3.25。
 
 ## libSVM
 
