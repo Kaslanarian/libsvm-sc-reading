@@ -4,9 +4,9 @@
 
 ## 预览
 
-![1](src/1.png)
-
-![2](src/2.png)
+![1](src/libsvm_00.jpg)
+![2](src/libsvm_01.jpg)
+![2](src/libsvm_02.jpg)
 
 ## SVM和libSVM
 
