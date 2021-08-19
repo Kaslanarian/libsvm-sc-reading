@@ -31,12 +31,14 @@ libSVM其实是一个面向求解带约束的二次规划问题的软件包，�
 SMO（Sequential Minimal Optimization）是求解SVM问题的高效算法之一，libSVM采用的正是该算法。SMO算法其实是一种启发式算法：先选择两个变量$α_i$和$α_j$，然后固定其他参数，从而将问题转化成一个二变量的二次规划问题。求出能使目标最大的一对$α_i$和$α_j$后，将它们固定，再选择两个变量，直到目标值收敛。
 
 笔者在[SMO算法 - 计算方法]([SMO算法 - 邢存远的博客 | Welt Xing's Blog (welts.xyz)](https://welts.xyz/2021/07/09/smo/))中计算出，在选定$i$和$j$后，$\alpha_i$和$\alpha_j$满足下面的更新公式：
+
 $$
 \begin{cases}
 \alpha_i^\text{new}=\dfrac{y_i}{\eta}(E_j-E_i)+\alpha_i^\text{old}\\
 \alpha_j^\text{new}=\dfrac{y_j}{\eta}(E_i-E_j)+\alpha_j^\text{old}
 \end{cases}
 $$
+
 其中$\eta=K_{11}-2K_{12}+K_{22}$，$E_i=f(x_i)-y_i$。但我们这里并没有考虑$\alpha_i$的约束边界，也就是$[0,C]$。同时我们也可以发现如何选择$i$和$j$会影响学习效率。
 
 #### SMO算法的变量选择（WSS）
@@ -69,7 +71,7 @@ libSVM将这三点完全考虑进来。我们前面已经提到了变量选择�
 最后一个想法是梯度的增量式更新，思想很简单，如果我们的任务是对变量`a`进行加1运算，我们更愿意这样（假设此时`a`为10）：
 
 ```cpp
-a ++
+a++
 ```
 
 而不是重新计算：
@@ -103,4 +105,3 @@ libSVM总体由头文件`svm.h`和源文件`svm.cpp`构成，我们按照这样�
 最后我们对libSVM中最上层的接口函数在[libSVM源码解读（6）](https://welts.xyz/2021/07/15/libsvm6/)中进行总结，至此完成了libSVM的源码解读。
 
 我们将上面零碎的知识整理成pdf。
-
