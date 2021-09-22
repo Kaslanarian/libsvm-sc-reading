@@ -41,6 +41,8 @@ $$
 
 其中$\eta=K_{11}-2K_{12}+K_{22}$，$E_i=f(x_i)-y_i$。但我们这里并没有考虑$\alpha_i$的约束边界，也就是$[0,C]$。同时我们也可以发现如何选择$i$和$j$会影响学习效率。
 
+此外，我们还验证了SVR问题用SMO算法求解的可行性：[SMO求解支持向量回归 - 邢存远的博客 | Welt Xing's Blog (welts.xyz)](https://welts.xyz/2021/09/16/svr/)
+
 #### SMO算法的变量选择（WSS）
 
 《统计学习方法》中提出分别通过“违反KKT条件程度”和“误差最大化”准则来选择$i$和$j$。而在《[Working Set Selection Using Second Order Information for Training Support Vector Machines](https://www.jmlr.org/papers/volume6/fan05a/fan05a.pdf)》提出了多种具体的选择i和j（标准的称呼是工作集）的算法。libSVM在选择第一个工作集元素（也就是$i$）时采用了“基于一阶近似的变量选择”；在选择第二个工作集元素时采用了“基于一阶近似的变量选择”。这一算法并不是论文中最复杂的选取方法，可能是工程实现方面的考虑。
