@@ -1,6 +1,6 @@
 ## 引言
 
-早在学习SVM时，笔者便有亲手实现一个SVM的想法。后来发现其实现难度与数学技巧远高于单隐层神经网络，这对于只能写出一个二分类感知机的我不亚于小学生做高考题。在老师的建议下，笔者决定去阅读当前最流行的SVM代码库：libSVM和libLinear的源代码，不仅是学习SVM怎么写，也是学习一个合格的代码框架应该如何去设计。在此之前，笔者已经对SVM的SMO算法和实现技巧进行了一些零散的了解，这里打算将它们串联起来，同时为阅读源码提供一定的数学基础。
+早在学习SVM时，笔者便有亲手实现一个SVM的想法。后来发现其实现难度与数学技巧远高于单隐层神经网络，这对于只能写出一个二分类感知机的我不亚于小学生做高考题。在老师的建议下，笔者决定去阅读当前最流行的SVM代码库：LIBSVM和LIBLinear的源代码，不仅是学习SVM怎么写，也是学习一个合格的代码框架应该如何去设计。在此之前，笔者已经对SVM的SMO算法和实现技巧进行了一些零散的了解，这里打算将它们串联起来，同时为阅读源码提供一定的数学基础。
 
 ## 预览
 
@@ -8,27 +8,27 @@
 ![2](src/libsvm_01.jpg)
 ![2](src/libsvm_02.jpg)
 
-## SVM和libSVM
+## SVM和LIBSVM
 
 [支持向量机](https://en.wikipedia.org/wiki/Support-vector_machine)(SVM, Support Vector Machine)属于一种线性分类器，是建立在统计学习理论的VC维理论和结构风险最小原理的基础上，根据有限的训练集，在模型的复杂性和学习性之间寻求最佳的折中，以获得最好的泛化能力的经典分类方法。
 
-[libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/)是由国立台湾大学的林智仁教授等开发的一款利用支持向量机用于分类、回归和区间估计等机器学习任务的多语言（C++、Java、Python、MATLAB等）、跨平台（Windows、Linux、mac OS）的集成化软件，最新版本为Version 3.25。
+[LIBSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/)是由国立台湾大学的林智仁教授等开发的一款利用支持向量机用于分类、回归和区间估计等机器学习任务的多语言（C++、Java、Python、MATLAB等）、跨平台（Windows、Linux、mac OS）的集成化软件，最新版本为Version 3.25。
 
 ## libSVM
 
-这一部分主要讨论libSVM相关，包括算法和实现。
+这一部分主要讨论LIBSVM相关，包括算法和实现。
 
 ### SVM种类
 
-在libSVM中共涉及到5类支持向量机，分别用于回归，分类和分布估计等任务。笔者已经对其进行总结：
+在LIBSVM中共涉及到5类支持向量机，分别用于回归，分类和分布估计等任务。笔者已经对其进行总结：
 
 [支持向量机 - 种类汇总](https://welts.xyz/2021/07/11/svm-class/)
 
-libSVM其实是一个面向求解带约束的二次规划问题的软件包，里面所有的算法全部是围绕优化问题展开。笔者在《机器学习导论》等课程中并没有接触到分布估计任务，因此也将《[LIBSVM: A Library for Support Vector Machines](https://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf)》中这一部分进行了分析：[SVM的分布估计](https://welts.xyz/2021/07/12/dist_esti/)。
+LIBSVM其实是一个面向求解带约束的二次规划问题的软件包，里面所有的算法全部是围绕优化问题展开。笔者在《机器学习导论》等课程中并没有接触到分布估计任务，因此也将《[LIBSVM: A Library for Support Vector Machines](https://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf)》中这一部分进行了分析：[SVM的分布估计](https://welts.xyz/2021/07/12/dist_esti/)。
 
 ### SMO算法
 
-SMO（Sequential Minimal Optimization）是求解SVM问题的高效算法之一，libSVM采用的正是该算法。SMO算法其实是一种启发式算法：先选择两个变量$α_i$和$α_j$，然后固定其他参数，从而将问题转化成一个二变量的二次规划问题。求出能使目标最大的一对$α_i$和$α_j$后，将它们固定，再选择两个变量，直到目标值收敛。
+SMO（Sequential Minimal Optimization）是求解SVM问题的高效算法之一，libSVM采用的正是该算法。SMO算法其实是一种启发式算法：先选择两个变量 $α_i$ 和 $α_j$ ，然后固定其他参数，从而将问题转化成一个二变量的二次规划问题。求出能使目标最大的一对 $α_i$ 和$α_j$ 后，将它们固定，再选择两个变量，直到目标值收敛。
 
 笔者在[SMO算法 - 计算方法]([SMO算法 - 邢存远的博客 | Welt Xing's Blog (welts.xyz)](https://welts.xyz/2021/07/09/smo/))中计算出，在选定$i$和$j$后，$\alpha_i$和$\alpha_j$满足下面的更新公式：
 
